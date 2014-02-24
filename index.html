@@ -32,7 +32,6 @@
 		<button id="tester" onclick="getPatientData();" value="Get Patient Demographics">Get Patient Demographics</button>
 			
 		<br><br><br><br><br><br><br><br>
-		<div id="direction">0</div>
 		<div id="result">Name:</div>
 		
 	</body>
@@ -57,7 +56,11 @@
 		});
 	}
 
-
+	document.addEventListener("deviceready", 
+	function(){
+		$("#pidx").focus(); 
+		}
+	,true);
 
 	function OnGetMemberSuccess(data, status) {
 		//alert('success');
