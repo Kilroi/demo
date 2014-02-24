@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<title>&nbsp;</title>
+	<head>
+		<style>
+			#compass {
+
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				z-index: 1;
+			}
+			#needle {
+
+				position: absolute;
+				top: 0px;
+				left: 3px;
+				z-index: 10;
+			}
+
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	</head>
+	<body>
+		PIDX: <input type="text" id="pidx" ><br>
+		<button id="tester" onclick="getPatientData();" value="Get Patient Demographics">Get Patient Demographics</button>
+			
+		<br><br><br><br><br><br><br><br>
+		<div id="direction">0</div>
+		<div id="result">Name:</div>
+		
+	</body>
+</html>
+<script>
+	 
+	function getPatientData() {
+	    
+		var pidx = $("#pidx").val();
+
+		alert(pidx);
+
+
+		$.ajax({
+		contentType: "application/json; charset=utf-8",
+		type: "POST",	        
+		url: "http://10.105.21.62/PatientService.asmx/GetPatient",
+		data: "{'patientNumber':'44526'}",
+		dataType: 'json',
+		crossDomain: true,
+		success: OnGetMemberSuccess,
+		error: OnGetMemberError
+		});
+	}
+
+
+
+	function OnGetMemberSuccess(data, status) {
+		//alert('success');
+		$("#result").html("Name: " + data.d.LastName + ", " + data.d.FirstName);
+	}
+	
+	function OnGetMemberError(request, status, error) {
+		//debugger;
+	    alert('error');
+	}  
+	  
+	
+</script>
