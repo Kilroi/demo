@@ -39,18 +39,17 @@
 </html>
 <script>
 	 
+	 $("#pidx").focus();
+	 
 	function getPatientData() {
 	    
 		var pidx = $("#pidx").val();
-
-		alert(pidx);
-
-
+		
 		$.ajax({
 		contentType: "application/json; charset=utf-8",
 		type: "POST",	        
 		url: "http://10.105.21.62/PatientService.asmx/GetPatient",
-		data: "{'patientNumber':'44526'}",
+		data: "{'patientNumber':'" + pidx + "'}",
 		dataType: 'json',
 		crossDomain: true,
 		success: OnGetMemberSuccess,
@@ -66,8 +65,6 @@
 	}
 	
 	function OnGetMemberError(request, status, error) {
-		$("#result").html("error");
-	    alert('error');
 	}  
 	  
 	
